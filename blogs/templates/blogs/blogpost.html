@@ -1,0 +1,29 @@
+{% extends 'blogs/base.html' %}
+
+{% block content %}
+
+<p>Blogpost: {{ blogpost }}</p>
+
+<p>Blogtexts:</p>
+
+<p>
+    <a href="{% url 'blogs:new_blogtext' blogpost.id %}">Add new blogtext</a>
+</p>
+
+<ul>
+{% for blogtext in blogtexts %}
+        <li>
+            <p>{{ blogtext.date_added|date:'M d, Y H:i' }}</p>
+            <p>{{ blogtext.text|linebreaks }}</p>
+            <p>
+              <a href="{% url 'blogs:edit_blogtext' blogtext.id %}">Edit blogtext</a>
+            </p>
+        </li>
+{% empty %}
+    <li>No blogtexts have been added yet.</li>
+{% endfor %}
+</ul> 
+
+
+
+{% endblock content %}
